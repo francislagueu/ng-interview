@@ -1,3 +1,55 @@
-<p>
-  contact works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-12 s12 m6">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title" style="font-size:1.5em; color:black; font-weight:bold;">Contact Us</span>
+          <div class="row">
+            <form class="col s12" [formGroup]="contactForm" (ngSubmit)="sendMessage()" novalidate>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input id="email" type="email" class="validate" formControlName="email">
+                  <label for="email">Email</label>
+                  <div *ngIf="contactForm.get('email').invalid && (contactForm.get('email').dirty || contactForm.get('email').touched)" class="errors">
+                    <div *ngIf="contactForm.get('email').hasError('required')">Email is required</div>
+                    <div *ngIf="contactForm.get('email').hasError('email')">Email must be a valid email address</div>
+                </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input id="subject" type="text" class="validate" formControlName="subject">
+                  <label for="subject">Subject</label>
+                  <div *ngIf="contactForm.get('subject').invalid && (contactForm.get('subject').dirty || contactForm.get('subject').touched)" class="errors">
+                    <div *ngIf="contactForm.get('subject').hasError('required')">Subject is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <textarea id="body" class="materialize-textarea" formControlName="body"></textarea>
+                  <label for="body">Message</label>
+                  <div *ngIf="contactForm.get('body').invalid && (contactForm.get('body').dirty || contactForm.get('body').touched)" class="errors">
+                    <div *ngIf="contactForm.get('body').hasError('required')">Message is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col s4 off-set-2">
+                  <button class="btn waves-effect waves-light right" type="submit" [disabled]="contactForm.invalid">Send
+                    <i class="material-icons right">send</i>
+                  </button>
+                </div>
+                <div class="col s4 off-set-2">
+                  <button class="btn btn-default right" type="reset" (click)="resetForm()" [disabled]="contactForm.invalid">Reset
+                    <i class="material-icons right">restore</i>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
